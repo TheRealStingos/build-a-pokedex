@@ -18,7 +18,8 @@ export function startREPL(state: State) {
         }
         if (state.commands[result[0]]) {
             try {
-                await state.commands[result[0]].callback(state);
+                const [commandName, ...args] = result
+                await state.commands[commandName].callback(state, ...args);
             } catch (e) {
                 console.error(e)
             }
