@@ -10,6 +10,7 @@ export class Cache {
 
     constructor(interval: number) {
         this.#interval = interval;
+        this.#startReapLoop();
     }
 
     add<T>(key: string, val: T) {
@@ -20,7 +21,7 @@ export class Cache {
         if (!this.#cache.get(key)) {
             return undefined
         }
-        return this.#cache.get(key)
+        return this.#cache.get(key)?.val
     }
 
     #reap() {
